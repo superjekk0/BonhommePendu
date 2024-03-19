@@ -6,17 +6,18 @@ namespace BonhommePendu.Events
     {
         public GuessEvent(GameData gameData, char letter) {
             bool foundOneLetter = false;
-            for(int i = 0; i < gameData.NbLetters; i++)
+            Events = new List<GameEvent>();
+            for (int i = 0; i < gameData.RevealedWord.Length; i++)
             {
-                if(gameData.HasLetterAtIndex(letter, i))
+                if(gameData.HasUnrevealedLetterAtIndex(letter, i))
                 {
                     foundOneLetter = true;
-                    Events.Add(new RevealLetter(letter, i));
+                    Events.Add(new RevealLetterEvent(gameData, letter, i));
                 }
             }
             if(!foundOneLetter)
             {
-                Events.Add(new LoseLifeEvent());
+                Events.Add(new LoseLifeEvent(gameData));
             }
         }
     }
