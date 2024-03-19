@@ -89,6 +89,11 @@ export class AppComponent {
           setTimeout(() => this.hangman.showMore(), 1000);
           break;
         }
+        case "GuessedLetter": {
+          this.gameData.guessedLetters.push(event.letter);
+          break;
+        }
+
       }
 
       if(event.events){

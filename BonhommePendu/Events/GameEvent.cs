@@ -7,6 +7,7 @@ namespace BonhommePendu.Events
     [JsonDerivedType(typeof(RevealLetterEvent), typeDiscriminator: "RevealLetter")]
     [JsonDerivedType(typeof(WinEvent), typeDiscriminator: "Win")]
     [JsonDerivedType(typeof(LoseEvent), typeDiscriminator: "Lose")]
+    [JsonDerivedType(typeof(GuessedLetterEvent), typeDiscriminator: "GuessedLetter")]
     public class GameEvent
     {
         public List<GameEvent> Events { get; set; }

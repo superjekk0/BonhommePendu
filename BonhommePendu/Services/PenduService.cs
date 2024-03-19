@@ -25,8 +25,15 @@ namespace BonhommePendu.Services
             return null;
         }
 
-        public GameEvent GuessLetter(char letter)
+        public GameEvent? GuessLetter(char letter)
         {
+            letter = char.ToLower(letter);
+            // Can't guess the same letter twice
+            if (_gameData.GuessedLetters.Contains(letter))
+            {
+                return null;
+            }
+
             return new GuessEvent(_gameData, letter);
         }
 

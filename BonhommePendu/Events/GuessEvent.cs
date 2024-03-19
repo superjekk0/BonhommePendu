@@ -5,8 +5,12 @@ namespace BonhommePendu.Events
     public class GuessEvent : GameEvent
     {
         public GuessEvent(GameData gameData, char letter) {
-            bool foundOneLetter = false;
             Events = new List<GameEvent>();
+
+            Events.Add(new GuessedLetterEvent(gameData, letter));
+
+            bool foundOneLetter = false;
+            
             for (int i = 0; i < gameData.RevealedWord.Length; i++)
             {
                 if(gameData.HasUnrevealedLetterAtIndex(letter, i))

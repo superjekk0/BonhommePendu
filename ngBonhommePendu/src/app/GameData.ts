@@ -3,4 +3,5 @@ export interface GameData {
   revealedWord:string;
   won:boolean;
   lost:boolean;
+  guessedLetters:string[];
 }

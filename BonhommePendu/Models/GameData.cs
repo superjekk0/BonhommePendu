@@ -11,6 +11,8 @@ namespace BonhommePendu.Models
         private int NbRevealedLetters { get; set; }
         private int NbLetters { get; set; }
 
+        public List<char> GuessedLetters { get; set; }
+
         public int NbTries { get; set; }
         public bool Won { get; set; }
         public bool Lost { get; set; }
@@ -25,6 +27,7 @@ namespace BonhommePendu.Models
             NbRevealedLetters = 0;
             NbTries = 0;
             RevealedWord = "";
+            GuessedLetters = new List<char>();
             for(int i = 0; i < NbLetters; i++)
             {
                 RevealedWord += DEFAULT_LETTER;

@@ -25,8 +25,6 @@ export class HangmanComponent {
       classes?.remove("fadeIn");
     }
 
-    console.log(nbTries);
-
     for(let i = 0; i < nbTries; i++){
       this.showMore();
     }
@@ -37,6 +35,7 @@ export class HangmanComponent {
     if(!this.parts)
       return;
 
+    // Affiche un élément de plus
     this.parts.item(this.index)?.classList.add("fadeIn");
     this.index++;
   }

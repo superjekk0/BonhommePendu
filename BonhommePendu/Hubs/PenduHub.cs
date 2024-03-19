@@ -30,8 +30,9 @@ namespace BonhommePendu.Hubs
 
         public async Task GuessLetter(char letter)
         {
-            GameEvent gameEvent = _penduService.GuessLetter(letter);
-            await Clients.All.SendAsync("Event", gameEvent as GameEvent);
+            GameEvent? gameEvent = _penduService.GuessLetter(letter);
+            if(gameEvent != null)
+                await Clients.All.SendAsync("Event", gameEvent as GameEvent);
         }
     }
 }
