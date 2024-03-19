@@ -6,6 +6,8 @@ namespace BonhommePendu.Services
 {
     public class PenduService
     {
+        public const string LANGUAGE = "en";
+
         private GameData _gameData { get; set; }
 
         public GameData JoinGame()
@@ -42,10 +44,10 @@ namespace BonhommePendu.Services
         {
             HttpClient client = new HttpClient();
             int wordLength = 10;
-            var result = await client.GetAsync("https://random-word-api.herokuapp.com/word?lang=fr&length=" + wordLength);
+            var result = await client.GetAsync("https://random-word-api.herokuapp.com/word?lang=" + LANGUAGE + "&length=" + wordLength);
             var randomWord = await result.Content.ReadAsStringAsync();
-            // On se débarasse des charactères [\" au début et à la fin 
-            return randomWord.Substring(3, wordLength);
+            // On se débarasse des charactères \" au début et à la fin 
+            return randomWord.Substring(2, wordLength);
         }
     }
 }

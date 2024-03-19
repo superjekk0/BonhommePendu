@@ -42,8 +42,8 @@ namespace BonhommePendu.Models
         {
             var letterInWord = Word[index];
 
-            // Pour accepter les accents
-            bool memeLettre = String.Compare(letterInWord.ToString(), letter.ToString(), CultureInfo.CurrentCulture, CompareOptions.IgnoreNonSpace | CompareOptions.IgnoreCase) == 0;
+            // Pas de support du français pour l'instant
+            bool memeLettre = letter == letterInWord;
             
             // Si la lettre n'est pas encore découverte
             return memeLettre;

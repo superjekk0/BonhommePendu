@@ -4,7 +4,7 @@ namespace BonhommePendu.Events
 {
     public class LoseEvent : GameEvent
     {
-        public string Word;
+        public string Word { get; set; }
 
         public LoseEvent(GameData gameData) {
             gameData.Lost = true;
