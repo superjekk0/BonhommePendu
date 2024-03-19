@@ -15,11 +15,12 @@ namespace BonhommePendu.Services
             return null;
         }
 
-        public GameData? StartGame()
+        public async Task<GameData?> StartGame()
         {
             if (_gameData == null || _gameData.Won || _gameData.Lost)
             {
-                _gameData = new GameData(GetRandomWord());
+                string randomWord = await GetRandomWord();
+                _gameData = new GameData(randomWord);
                 return _gameData;
             }
             return null;
@@ -28,7 +29,7 @@ namespace BonhommePendu.Services
         public GameEvent? GuessLetter(char letter)
         {
             letter = char.ToLower(letter);
-            // Can't guess the same letter twice
+            // On ne fait rien si on a déjà essayé cette lettre
             if (_gameData.GuessedLetters.Contains(letter))
             {
                 return null;
@@ -37,12 +38,14 @@ namespace BonhommePendu.Services
             return new GuessEvent(_gameData, letter);
         }
 
-        private string GetRandomWord()
+        private async Task<string> GetRandomWord()
         {
-            WebClient client = new WebClient();
-            string randomWord = client.DownloadString("https://random-word-api.herokuapp.com/word?lang=en&length=10");
-            // On se débarasse des charactères au début et à la fin
-            return randomWord.Substring(2, 10);
+            HttpClient client = new HttpClient();
+            int wordLength = 10;
+            var result = await client.GetAsync("https://random-word-api.herokuapp.com/word?lang=fr&length=" + wordLength);
+            var randomWord = await result.Content.ReadAsStringAsync();
+            // On se débarasse des charactères [\" au début et à la fin 
+            return randomWord.Substring(3, wordLength);
         }
     }
 }

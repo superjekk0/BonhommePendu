@@ -3,13 +3,13 @@
 namespace BonhommePendu.Events
 {
     [JsonDerivedType(typeof(GuessEvent), typeDiscriminator: "Guess")]
-    [JsonDerivedType(typeof(LoseLifeEvent), typeDiscriminator: "LoseLife")]
+    [JsonDerivedType(typeof(WrongGuessEvent), typeDiscriminator: "WrongGuess")]
     [JsonDerivedType(typeof(RevealLetterEvent), typeDiscriminator: "RevealLetter")]
     [JsonDerivedType(typeof(WinEvent), typeDiscriminator: "Win")]
     [JsonDerivedType(typeof(LoseEvent), typeDiscriminator: "Lose")]
     [JsonDerivedType(typeof(GuessedLetterEvent), typeDiscriminator: "GuessedLetter")]
     public class GameEvent
     {
-        public List<GameEvent> Events { get; set; }
+        public List<GameEvent>? Events { get; set; }
     }
 }

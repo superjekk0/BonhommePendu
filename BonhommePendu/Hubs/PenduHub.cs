@@ -23,7 +23,7 @@ namespace BonhommePendu.Hubs
 
         public async Task StartGame()
         {
-            GameData? gameData = _penduService.StartGame();
+            GameData? gameData = await _penduService.StartGame();
             if (gameData != null)
                 await Clients.All.SendAsync("GameData", gameData);
         }

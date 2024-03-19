@@ -1,5 +1,5 @@
 export interface GameData {
-  nbTries:number;
+  nbWrongGuesses:number;
   revealedWord:string;
   won:boolean;
   lost:boolean;

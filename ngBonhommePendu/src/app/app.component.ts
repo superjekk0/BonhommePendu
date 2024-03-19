@@ -20,6 +20,7 @@ export class AppComponent {
 
   isConnected: boolean = false;
   letter:string = "";
+  wronglyGuessedWord:string = "";
 
   gameData:GameData | undefined;
 
@@ -41,8 +42,7 @@ export class AppComponent {
           console.log("Data:");
           console.log(data);
           this.gameData = data;
-          console.log("Will restart");
-          this.hangman.restart(data.nbTries);
+          this.hangman.restart(data.nbWrongGuesses);
         });
 
         this.hubConnection!.on('Event', (event) => {
@@ -71,8 +71,8 @@ export class AppComponent {
     if(this.gameData)
     {
       switch(event.$type){
-        case "LoseLife": {
-          this.gameData.nbTries--;
+        case "WrongGuess": {
+          this.gameData.nbWrongGuesses++;
           this.hangman.showMore();
           break;
         }
@@ -86,6 +86,7 @@ export class AppComponent {
         }
         case "Lose": {
           this.gameData.lost = true;
+          this.wronglyGuessedWord = event.word;
           setTimeout(() => this.hangman.showMore(), 1000);
           break;
         }

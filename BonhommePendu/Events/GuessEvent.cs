@@ -9,19 +9,20 @@ namespace BonhommePendu.Events
 
             Events.Add(new GuessedLetterEvent(gameData, letter));
 
-            bool foundOneLetter = false;
+            bool foundAtLeastOneLetter = false;
             
             for (int i = 0; i < gameData.RevealedWord.Length; i++)
             {
-                if(gameData.HasUnrevealedLetterAtIndex(letter, i))
+                if(gameData.HasSameLetterAtIndex(letter, i))
                 {
-                    foundOneLetter = true;
+                    foundAtLeastOneLetter = true;
                     Events.Add(new RevealLetterEvent(gameData, letter, i));
                 }
             }
-            if(!foundOneLetter)
+
+            if(!foundAtLeastOneLetter)
             {
-                Events.Add(new LoseLifeEvent(gameData));
+                Events.Add(new WrongGuessEvent(gameData));
             }
         }
     }

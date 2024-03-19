@@ -9,9 +9,8 @@ namespace BonhommePendu.Events
 
         public RevealLetterEvent(GameData gameData, char letter, int index)
         {
-            Letter = letter;
             Index = index;
-            gameData.RevealLetter(letter, index);
+            Letter = gameData.RevealLetter(index);
             if(gameData.HasGuessedTheWord)
             {
                 Events = new List<GameEvent>
@@ -19,6 +18,9 @@ namespace BonhommePendu.Events
                     new WinEvent(gameData)
                 };
             }
+
+            // Conseil: Vous pouvez utiliser gameData.HasGuessedTheWord pour savoir si c'est une victoire
+
         }
     }
 }
