@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace BonhommePendu.Models
 {
@@ -11,6 +12,7 @@ namespace BonhommePendu.Models
         private int NbRevealedLetters { get; set; }
         private int NbLetters { get; set; }
 
+        [JsonIgnore]
         public string Word { get; private set; }
 
         // Une liste qui contient toutes les lettres essayées, qu'elles soient dans le mot ou pas
