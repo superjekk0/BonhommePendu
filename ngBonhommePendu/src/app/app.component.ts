@@ -33,23 +33,25 @@ export class AppComponent {
                               .withUrl('https://localhost:7170/Pendu')
                               .build();
 
-    this.hubConnection
+      this.hubConnection!.on('GameData', (data:GameData) => {
+        console.log("Data:");
+        console.log(data);
+        this.gameData = data;
+        this.hangman.restart(data.nbWrongGuesses);
+      });
+
+      this.hubConnection!.on('Event', (event) => {
+        console.log("Event:");
+        console.log(event);
+        this.applyEvent(event);
+      });
+
+      this.hubConnection
       .start()
       .then(() => {
         console.log("Connected");
         this.isConnected = true;
-        this.hubConnection!.on('GameData', (data:GameData) => {
-          console.log("Data:");
-          console.log(data);
-          this.gameData = data;
-          this.hangman.restart(data.nbWrongGuesses);
-        });
 
-        this.hubConnection!.on('Event', (event) => {
-          console.log("Event:");
-          console.log(event);
-          this.applyEvent(event);
-        });
       })
       .catch(err => console.log('Error while starting connection: ' + err))
   }
