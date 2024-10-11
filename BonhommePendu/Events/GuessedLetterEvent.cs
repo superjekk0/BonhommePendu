@@ -8,6 +8,10 @@ namespace BonhommePendu.Events
         // TODO: Compléter
         public GuessedLetterEvent(GameData gameData, char letter)
         {
+            if (!gameData.GuessedLetters.Contains(letter))
+            {
+                gameData.GuessedLetters.Add(letter);
+            }
         }
     }
 }

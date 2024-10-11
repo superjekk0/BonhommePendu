@@ -6,8 +6,11 @@ namespace BonhommePendu.Events
     public class GuessEvent : GameEvent
     {
         // TODO: Compléter
-        public GuessEvent(GameData gameData, char letter) {
+        public char Letter { get; set; }
+        public GuessEvent(GameData gameData, char letter) :base() {
             // TODO: Commencez par ICI
+            Events.Add(new GuessedLetterEvent(gameData, letter));
+            Letter = letter;
         }
     }
 }

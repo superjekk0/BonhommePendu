@@ -11,5 +11,10 @@ namespace BonhommePendu.Events
     public class GameEvent
     {
         public List<GameEvent>? Events { get; set; }
+
+        public GameEvent()
+        {
+            Events = new();
+        }
     }
 }
